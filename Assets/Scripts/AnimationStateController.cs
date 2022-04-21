@@ -37,7 +37,7 @@ public class AnimationStateController : MonoBehaviour
         bool sprintPressed = Input.GetKey("left shift");
         bool jumpPressed = Input.GetKey("space");
         bool walkBackPressed = Input.GetKey("s");
-        bool blockPressed = Input.GetMouseButtonDown(1);
+        bool blockPressed = Input.GetMouseButton(1);
         bool blockUnpressed = Input.GetMouseButtonUp(1);
 
         handleIdleSwing();
@@ -78,10 +78,21 @@ public class AnimationStateController : MonoBehaviour
         // if player is holding down right click
         if (blockPressed) {
             animator.SetBool("isBlocking", true);
+            animator.SetLayerWeight(1, 1);
         }
         // if player releases right click
         if (blockUnpressed) {
             animator.SetBool("isBlocking", false);
+            animator.SetLayerWeight(1, 0);
+        }
+
+        if ((walkPressed || walkBackPressed) && blockPressed) {
+            animator.SetBool("isBlocking", true);
+            animator.SetLayerWeight(1, 1);
+        }
+        if ((walkPressed || walkBackPressed) && blockUnpressed) {
+            animator.SetBool("isBlocking", false);
+            animator.SetLayerWeight(1, 0);
         }
     }
 
