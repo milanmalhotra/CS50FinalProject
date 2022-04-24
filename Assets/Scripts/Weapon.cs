@@ -4,47 +4,31 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour {
     public GameObject bladeGameObject;
-
     public float bladeExtendSpeed = 0.1f;
-
     public bool weaponActive = false;
-
-    public Color bladeColor;
-	
-	public float bladeColorIntensity = 600f; 
-
-	public float lightIntensity = 1000f;
-	
     public AudioClip soundOn;
     public AudioClip soundOff;
     public AudioClip soundLoop;
-    public AudioClip soundSwing;
-
     public AudioSource AudioSource;
     public AudioSource AudioSourceLoop;
     public AudioSource AudioSourceSwing;
-    
-    private float swingSpeed = 0;
-    private Vector3 lastSwingPosition = Vector3.zero;
-    private KeyCode TOGGLE_KEY_CODE = KeyCode.F;
-    private const string SHADER_PROPERTY_EMISSION_COLOR = "_EmissionColor";
-    private class Blade
+    float swingSpeed = 0;
+    Vector3 lastSwingPosition = Vector3.zero;
+    KeyCode TOGGLE_KEY_CODE = KeyCode.F;
+    const string SHADER_PROPERTY_EMISSION_COLOR = "_EmissionColor";
+    class Blade
     {
         public GameObject gameObject;
         public Light light;
-
-        private float scaleMin;
-        private float scaleMax;
-        private float scaleCurrent;
-
         public bool active = false;
+        float scaleMin;
+        float scaleMax;
+        float scaleCurrent;
+        float extendDelta;
+        float localScaleX;
+        float localScaleZ;
 
-        private float extendDelta;
-
-        private float localScaleX;
-        private float localScaleZ;
-
-        public Blade( GameObject gameObject, float extendSpeed, bool active)
+        public Blade(GameObject gameObject, float extendSpeed, bool active)
         {
 
             this.gameObject = gameObject;
@@ -129,8 +113,6 @@ public class Weapon : MonoBehaviour {
         
         // initialize audio depending on beam activitiy
         InitializeAudio();
-        // light and blade color
-        InitializeBladeColor();
         // initially update blade length, so that it isn't set to what we have in unity's visual editor
         UpdateBlades();
     }
@@ -144,13 +126,6 @@ public class Weapon : MonoBehaviour {
             AudioSourceLoop.Play();
         }
     }
-
-    // set the color of the light and the blade
-    void InitializeBladeColor()
-    {
-        // update blade color, light color and glow color
-        blades[0].SetColor(bladeColor, bladeColorIntensity);
-    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -159,41 +134,7 @@ public class Weapon : MonoBehaviour {
             ToggleWeaponOnOff();
         }
         UpdateBlades();
-        //updateSwingHandler();
     }
-
-    // calculate swing speed
-    // come back to this later, not working well at all
-    // private void updateSwingHandler()
-    // {
-    //     swingSpeed = (((transform.position - lastSwingPosition).magnitude) / Time.deltaTime);
-    //     lastSwingPosition = transform.position;
-
-    //     if (weaponActive)
-    //     {
-    //         if (swingSpeed > 200) 
-    //         {
-    //             if (!AudioSourceSwing.isPlaying)
-    //             {
-    //                 AudioSourceSwing.volume = 1f;
-    //                 AudioSourceSwing.PlayOneShot(soundSwing);
-    //             }
-    //         }
-    //         else
-    //         {
-    //             // fade out volume
-    //             if(AudioSourceSwing.isPlaying && AudioSourceSwing.volume > 0)
-    //             {
-    //                 AudioSourceSwing.volume *= 0.9f; // just random swing values; should be more generic
-    //             }
-    //             else
-    //             {
-    //                 AudioSourceSwing.volume = 0;
-    //                 AudioSourceSwing.Stop();
-    //             }
-    //         }
-    //     }
-    // }
 
     private void ToggleWeaponOnOff()
     {
@@ -229,8 +170,6 @@ public class Weapon : MonoBehaviour {
 
     private void UpdateBlades()
     {
-
-        blades[0].updateLight( lightIntensity);
         blades[0].updateSize();
 
 
@@ -240,7 +179,6 @@ public class Weapon : MonoBehaviour {
         {
             active = true;
         }
-        
         this.weaponActive = active;
     }
 }

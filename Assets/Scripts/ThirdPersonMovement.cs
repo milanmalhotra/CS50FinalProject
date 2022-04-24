@@ -32,7 +32,6 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         Move();
         Rotate();
-        // Jump();
     }
 
     void Rotate()
@@ -67,9 +66,5 @@ public class ThirdPersonMovement : MonoBehaviour
         }
 
         characterController.Move(moveDirection * speed * Time.deltaTime);
-    }
-
-    void Jump() {
-
     }
 }
