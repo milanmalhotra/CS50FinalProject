@@ -55,12 +55,12 @@ public class ThirdPersonMovement : MonoBehaviour
         }
 
         moveDirection.y -= Time.deltaTime;
-        if (Input.GetKey("w") && Input.GetKey("left shift"))
+        if (Input.GetKey("w") && Input.GetKey("left shift") && (!Input.GetKey("a") || !Input.GetKey("s") || !Input.GetKey("d")))
         {
             speed = sprintSpeed;
 
         }
-        if (Input.GetKey("w") && !Input.GetKey("left shift"))
+        else
         {
             speed = walkSpeed;
         }
