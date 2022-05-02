@@ -57,12 +57,12 @@ public class Weapon : MonoBehaviour {
             }
         }
 
-        public void SetActive( bool active)
+        public void SetActive(bool active)
         {
             extendDelta = active ? Mathf.Abs(extendDelta) : -Mathf.Abs(extendDelta);
         }
 
-        public void SetColor( Color color, float intensity)
+        public void SetColor(Color color, float intensity)
         {
             if (light != null)
             {
@@ -73,7 +73,7 @@ public class Weapon : MonoBehaviour {
             gameObject.GetComponentInChildren<MeshRenderer>().materials[0].SetColor( SHADER_PROPERTY_EMISSION_COLOR, bladeColor);
         }
 
-        public void updateLight( float lightIntensity)
+        public void updateLight(float lightIntensity)
         {
             if (this.light == null)
                 return;
@@ -103,7 +103,7 @@ public class Weapon : MonoBehaviour {
         }
     }
 
-    private List<Blade> blades;
+    List<Blade> blades;
 
     // Use this for initialization
     void Awake () {
@@ -136,7 +136,7 @@ public class Weapon : MonoBehaviour {
         UpdateBlades();
     }
 
-    private void ToggleWeaponOnOff()
+    void ToggleWeaponOnOff()
     {
         if (weaponActive)
         {
@@ -148,7 +148,7 @@ public class Weapon : MonoBehaviour {
         }
     }
 
-    private void WeaponOn()
+    void WeaponOn()
     {
         
         blades[0].SetActive(true);
@@ -159,7 +159,7 @@ public class Weapon : MonoBehaviour {
 
     }
 
-    private void WeaponOff()
+    void WeaponOff()
     {
         
         blades[0].SetActive(false);
@@ -168,7 +168,7 @@ public class Weapon : MonoBehaviour {
         AudioSourceLoop.Stop();
     }
 
-    private void UpdateBlades()
+    void UpdateBlades()
     {
         blades[0].updateSize();
 
