@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
     public Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
     public float health;
+    public Animator animator;
 
     //Patrol
     public Vector3 walkPoint;
@@ -82,7 +83,7 @@ public class EnemyController : MonoBehaviour
         alreadyAttacked = false;
     }
 
-    void TakeDamage(int damage) {
+    public void TakeDamage(int damage) {
         health -= damage;
 
         if (health <= 0)
@@ -91,7 +92,10 @@ public class EnemyController : MonoBehaviour
 
     void DestroyEnemy() {
         ///Add animation to play first then end game in some way, don't destroy gameobject
-        Destroy(gameObject);
+        animator.SetLayerWeight(1, 0);
+        animator.SetTrigger("isDead");
+        gameObject.GetComponent<EnemyController>().enabled = false;
+        // Destroy(gameObject);
     }
 
     //delete when done visualizing sight
