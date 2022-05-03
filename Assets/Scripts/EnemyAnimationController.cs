@@ -24,31 +24,25 @@ public class EnemyAnimationController : MonoBehaviour
             animator.SetBool("attack2", false);
         }
         if (enemyController.playerInAttackRange) {
-            animator.SetBool("isMoving", false);
-            time = time + 1f * Time.deltaTime;
-            if (time >= timeBetweenAttacks) {
-                time = 0f;
-                Attack();
-            }
+            Attack();
         }
-    }
-
-    float GenerateRandomNum() {
-        float num = Random.Range(0f, 2f);
-        return num;
     }
 
     void Attack() {
-        float num = GenerateRandomNum();
-        Debug.Log(num);
-        if (num > 1) {
-            animator.SetBool("attack1", true);
-            animator.SetBool("attack2", false);
-        }
-        else {
-            animator.SetBool("attack1", false);
-            animator.SetBool("attack2", true);
-        }
+        animator.SetBool("isMoving", false);
+        float num = Random.Range(0f, 2f);
+        time = time + 1f * Time.deltaTime;
 
+        if (time >= timeBetweenAttacks) {
+            time = 0f;
+            if (num > 1) {
+                animator.SetBool("attack1", true);
+                animator.SetBool("attack2", false);
+            }
+            else {
+                animator.SetBool("attack1", false);
+                animator.SetBool("attack2", true);
+            }
+        }
     }
 }

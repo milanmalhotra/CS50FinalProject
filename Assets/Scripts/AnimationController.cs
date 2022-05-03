@@ -11,6 +11,13 @@ public class AnimationController : MonoBehaviour
     public int numOfClicks = 0;
     public float maxComboDelay = 0.9f;
 
+    bool isSprinting;
+    bool isWalking;
+    bool isWalkingBack;
+    bool isWalkingRight;
+    bool isWalkingLeft;
+    bool isBlocking;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,11 +34,12 @@ public class AnimationController : MonoBehaviour
     }
 
     void movement() {
-        bool isSprinting = animator.GetBool("isSprinting");
-        bool isWalking = animator.GetBool("isWalking");
-        bool isWalkingBack = animator.GetBool("isWalkingBack");
-        bool isWalkingRight = animator.GetBool("isWalkingRight");
-        bool isWalkingLeft = animator.GetBool("isWalkingLeft");
+        isSprinting = animator.GetBool("isSprinting");
+        isWalking = animator.GetBool("isWalking");
+        isWalkingBack = animator.GetBool("isWalkingBack");
+        isWalkingRight = animator.GetBool("isWalkingRight");
+        isWalkingLeft = animator.GetBool("isWalkingLeft");
+        isBlocking = animator.GetBool("isBlocking");
 
         bool walkPressed = Input.GetKey("w");
         bool sprintPressed = Input.GetKey("left shift");
@@ -80,6 +88,18 @@ public class AnimationController : MonoBehaviour
         }
     }
 
+    //Sets a timer and triggers idleSwing animation when timer reaches limit
+    void handleIdleSwing() {
+        float limit = 10f;
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) {    
+            timer += Time.deltaTime;
+            if (timer >= limit) {
+                animator.SetTrigger("idleSwing");
+                timer = 0f;
+            }
+        }
+    }
+
     void combat() {
         bool blockPressed = Input.GetMouseButton(1);
         bool blockUnpressed = Input.GetMouseButtonUp(1);
@@ -117,18 +137,6 @@ public class AnimationController : MonoBehaviour
         }
     }
 
-    //Sets a timer and triggers idleSwing animation when timer reaches limit
-    void handleIdleSwing() {
-        float limit = 10f;
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) {    
-            timer += Time.deltaTime;
-            if (timer >= limit) {
-                animator.SetTrigger("idleSwing");
-                timer = 0f;
-            }
-        }
-    }
-
     public void return1() {
         if (numOfClicks >= 2) {
             animator.SetBool("attack2", true);
@@ -154,5 +162,9 @@ public class AnimationController : MonoBehaviour
         animator.SetBool("attack2", false);
         animator.SetBool("attack3", false);
         numOfClicks = 0;
+    }
+
+    public bool getBlockingState() {
+        return this.isBlocking;
     }
 }

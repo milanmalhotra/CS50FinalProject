@@ -283,6 +283,7 @@ MonoBehaviour:
   AudioSource: {fileID: 1968288528}
   AudioSourceLoop: {fileID: 774441725}
   AudioSourceSwing: {fileID: 1883960563}
+  animationController: {fileID: 5866666021143074770}
 --- !u!1 &63262987
 GameObject:
   m_ObjectHideFlags: 0
@@ -1849,6 +1850,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 50df4a5118e4b9147b04274a0cc6d57f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Blade
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 50df4a5118e4b9147b04274a0cc6d57f,
         type: 3}
@@ -5613,6 +5619,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 50df4a5118e4b9147b04274a0cc6d57f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Blade
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 50df4a5118e4b9147b04274a0cc6d57f,
         type: 3}

@@ -12,6 +12,7 @@ public class Weapon : MonoBehaviour {
     public AudioSource AudioSource;
     public AudioSource AudioSourceLoop;
     public AudioSource AudioSourceSwing;
+    public AnimationController animationController;
     float swingSpeed = 0;
     Vector3 lastSwingPosition = Vector3.zero;
     KeyCode TOGGLE_KEY_CODE = KeyCode.F;
@@ -19,7 +20,6 @@ public class Weapon : MonoBehaviour {
     class Blade
     {
         public GameObject gameObject;
-        public Light light;
         public bool active = false;
         float scaleMin;
         float scaleMax;
@@ -32,7 +32,6 @@ public class Weapon : MonoBehaviour {
         {
 
             this.gameObject = gameObject;
-            this.light = gameObject.GetComponentInChildren<Light>();
             this.active = active;
             // remember initial scale values (non extending part of the blade)
             this.localScaleX = gameObject.transform.localScale.x;
@@ -60,25 +59,6 @@ public class Weapon : MonoBehaviour {
         public void SetActive(bool active)
         {
             extendDelta = active ? Mathf.Abs(extendDelta) : -Mathf.Abs(extendDelta);
-        }
-
-        public void SetColor(Color color, float intensity)
-        {
-            if (light != null)
-            {
-                light.color = color;
-            }			
-			Color bladeColor = color * intensity;
-			// set the color in the shader. _EmissionColor is a reference which is defined in the property of the graph
-            gameObject.GetComponentInChildren<MeshRenderer>().materials[0].SetColor( SHADER_PROPERTY_EMISSION_COLOR, bladeColor);
-        }
-
-        public void updateLight(float lightIntensity)
-        {
-            if (this.light == null)
-                return;
-            // light intensity depending on blade size
-            this.light.intensity = this.scaleCurrent * lightIntensity;
         }
 
         public void updateSize()
@@ -129,7 +109,9 @@ public class Weapon : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(TOGGLE_KEY_CODE))
+        if (Input.GetKeyDown(TOGGLE_KEY_CODE) ||
+            (!weaponActive && animationController.getBlockingState()) ||
+            (!weaponActive && Input.GetMouseButton(0)))
         {
             ToggleWeaponOnOff();
         }
@@ -161,9 +143,7 @@ public class Weapon : MonoBehaviour {
 
     void WeaponOff()
     {
-        
         blades[0].SetActive(false);
-        
         AudioSource.PlayOneShot(soundOff);
         AudioSourceLoop.Stop();
     }
@@ -171,11 +151,9 @@ public class Weapon : MonoBehaviour {
     void UpdateBlades()
     {
         blades[0].updateSize();
-
-
         bool active = false;
         
-        if(blades[0].active)
+        if (blades[0].active)
         {
             active = true;
         }
