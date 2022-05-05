@@ -6,10 +6,11 @@ public class EnemyDamageController : MonoBehaviour
 {
     public ThirdPersonController tpc;
     public AnimationController animController;
+    public int damage;
     
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Player" && !animController.getBlockingState()) {
-            tpc.TakeDamage(50);
+            tpc.TakeDamage(damage);
         }
     }
 }

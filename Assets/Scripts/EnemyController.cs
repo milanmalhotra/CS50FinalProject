@@ -24,6 +24,9 @@ public class EnemyController : MonoBehaviour
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
+    //LookAtFunc
+    public float turnSpeed = 1.0f;
+
     void Awake() {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
@@ -69,7 +72,7 @@ public class EnemyController : MonoBehaviour
 
     void AttackPlayer() {
         agent.SetDestination(transform.position);
-
+        LookAtPlayer();
         if (!alreadyAttacked) {
             ///Attack code here
 
@@ -96,6 +99,23 @@ public class EnemyController : MonoBehaviour
         animator.SetTrigger("isDead");
         gameObject.GetComponent<EnemyController>().enabled = false;
         // Destroy(gameObject);
+    }
+
+    void LookAtPlayer() {
+        // Determine which direction to rotate towards
+        Vector3 targetDirection = player.position - transform.position;
+
+        // The step size is equal to speed times frame time.
+        float singleStep = turnSpeed * Time.deltaTime;
+
+        // Rotate the forward vector towards the target direction by one step
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
+
+        // Draw a ray pointing at our target in
+        Debug.DrawRay(transform.position, newDirection, Color.red);
+
+        // Calculate a rotation a step closer to the target and applies rotation to this object
+        transform.rotation = Quaternion.LookRotation(newDirection);
     }
 
     //delete when done visualizing sight

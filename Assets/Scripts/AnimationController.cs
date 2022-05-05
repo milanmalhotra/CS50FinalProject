@@ -126,18 +126,19 @@ public class AnimationController : MonoBehaviour
             animator.SetBool("isBlocking", false);
             animator.SetLayerWeight(1, 0);
         }
-        if (Input.GetMouseButton(0)) {
+        if (Input.GetMouseButtonDown(0)) {
             lastClickedTime = Time.time;
             numOfClicks++;
             if (numOfClicks == 1) {
                 animator.SetBool("attack1", true);
             }
+            Debug.Log(numOfClicks);
             numOfClicks = Mathf.Clamp(numOfClicks, 0, 3);
             timer = 0f;
         }
     }
 
-    public void return1() {
+    public void setAttack2() {
         if (numOfClicks >= 2) {
             animator.SetBool("attack2", true);
         }
@@ -147,7 +148,7 @@ public class AnimationController : MonoBehaviour
         }
     }
 
-    public void return2() {
+    public void setAttack3() {
         if (numOfClicks >= 3) {
             animator.SetBool("attack3", true);
         }
@@ -157,11 +158,15 @@ public class AnimationController : MonoBehaviour
         }
     }
 
-    public void return3() {
-        animator.SetBool("attack1", false);
-        animator.SetBool("attack2", false);
-        animator.SetBool("attack3", false);
-        numOfClicks = 0;
+    public void setEndAttack() {
+        if (!(animator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Attack 2") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Attack 3"))) {
+                animator.SetBool("attack1", false);
+                animator.SetBool("attack2", false);
+                animator.SetBool("attack3", false);
+                numOfClicks = 0;
+        }
     }
 
     public bool getBlockingState() {

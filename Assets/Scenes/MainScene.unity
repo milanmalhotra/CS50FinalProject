@@ -810,7 +810,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 34afd7137efca584c818b54c1f619595, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0
+  m_Volume: 0.166
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1889,6 +1889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 554745009}
+  animationController: {fileID: 5866666021143074770}
 --- !u!136 &681473987
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2425,7 +2426,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 34afd7137efca584c818b54c1f619595, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0
+  m_Volume: 0.18
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2954,7 +2955,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d57873cfe7613534b977909bdb657cec, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0
+  m_Volume: 0.229
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5459,7 +5460,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d57873cfe7613534b977909bdb657cec, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0
+  m_Volume: 0.222
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -6348,7 +6349,6 @@ GameObject:
   - component: {fileID: 543450652838956458}
   - component: {fileID: 5866666021143074768}
   - component: {fileID: 5866666021143074770}
-  - component: {fileID: 5866666021143074769}
   - component: {fileID: 5866666021143074772}
   - component: {fileID: 5866666021143074771}
   m_Layer: 7
@@ -7872,21 +7872,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5866666021143074769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148850218768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e31b2be444a5c514f866bd8f461a2267, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 5866666021143074768}
-  numOfClicks: 0
-  maxComboDelay: 2
 --- !u!114 &5866666021143074770
 MonoBehaviour:
   m_ObjectHideFlags: 0
