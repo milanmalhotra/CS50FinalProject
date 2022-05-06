@@ -6,10 +6,18 @@ public class DamageController : MonoBehaviour
 {
     public EnemyController enemyController;
     public AnimationController animationController;
+    public Healthbar healthbar;
+    public int damage;
+    public int currentHealth;
+
+    void Start() {
+        currentHealth = 100;
+    }
 
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Enemy" && !animationController.getBlockingState()) {
-            enemyController.TakeDamage(50);
+            enemyController.TakeDamage(damage);
+            healthbar.SetHealth(enemyController.health);
         }
     }
 }

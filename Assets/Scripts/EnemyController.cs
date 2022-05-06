@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
     public NavMeshAgent agent;
     public Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
-    public float health;
+    public int health;
     public Animator animator;
 
     //Patrol
