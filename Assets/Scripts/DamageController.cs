@@ -12,12 +12,13 @@ public class DamageController : MonoBehaviour
 
     void Start() {
         currentHealth = 100;
+        healthbar.SetHealthbarColor();
     }
 
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Enemy" && !animationController.getBlockingState()) {
             enemyController.TakeDamage(damage);
-            healthbar.SetHealth(enemyController.health);
+            healthbar.SetHealth(enemyController.health);  
         }
     }
 }

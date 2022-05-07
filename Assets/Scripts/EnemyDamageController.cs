@@ -9,6 +9,10 @@ public class EnemyDamageController : MonoBehaviour
     public Healthbar healthbar;
     public int damage;
     
+    void Start() {
+        healthbar.SetHealthbarColor();
+    }
+    
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Player" && !animController.getBlockingState()) {
             tpc.TakeDamage(damage);

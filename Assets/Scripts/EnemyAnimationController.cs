@@ -12,7 +12,6 @@ public class EnemyAnimationController : MonoBehaviour
 
     void Start() {
         timeBetweenAttacks = enemyController.timeBetweenAttacks;
-        Debug.Log(timeBetweenAttacks);
     }
 
     // Update is called once per frame
