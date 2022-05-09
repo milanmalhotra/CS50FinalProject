@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour {
     public AudioSource AudioSourceLoop;
     public AudioSource AudioSourceSwing;
     public AnimationController animationController;
-    float swingSpeed = 0;
+
     Vector3 lastSwingPosition = Vector3.zero;
     KeyCode TOGGLE_KEY_CODE = KeyCode.F;
     const string SHADER_PROPERTY_EMISSION_COLOR = "_EmissionColor";
