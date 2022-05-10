@@ -5,6 +5,8 @@ using UnityEngine;
 public class ThirdPersonController : MonoBehaviour
 {
     public CharacterController characterController;
+    public GameEnding gameEnding;
+    public CanvasGroup youDied;
     public Animator animator;
     public float walkSpeed;
     public float sprintSpeed;
@@ -87,5 +89,11 @@ public class ThirdPersonController : MonoBehaviour
         animator.SetLayerWeight(2, 0);
         animator.SetLayerWeight(3, 0);
         animator.SetTrigger("isDead");
+        StartCoroutine(timeBeforeEnding());
+    }
+
+    IEnumerator timeBeforeEnding() {
+        yield return new WaitForSeconds(1f);
+        gameEnding.ShowUI(youDied);
     }
 }

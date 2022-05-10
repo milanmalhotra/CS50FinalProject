@@ -10,6 +10,8 @@ public class EnemyController : MonoBehaviour
     public LayerMask whatIsGround, whatIsPlayer;
     public int health;
     public Animator animator;
+    public GameEnding gameEnding;
+    public CanvasGroup youWin;
 
     //Patrol
     public Vector3 walkPoint;
@@ -90,15 +92,14 @@ public class EnemyController : MonoBehaviour
         health -= damage;
 
         if (health <= 0)
-            Invoke(nameof(DestroyEnemy), 0.5f);
+            DestroyEnemy();
     }
 
     void DestroyEnemy() {
-        ///Add animation to play first then end game in some way, don't destroy gameobject
         animator.SetLayerWeight(1, 0);
         animator.SetTrigger("isDead");
         gameObject.GetComponent<EnemyController>().enabled = false;
-        // Destroy(gameObject);
+        StartCoroutine(timeBeforeEnding());
     }
 
     void LookAtPlayer() {
@@ -116,6 +117,11 @@ public class EnemyController : MonoBehaviour
 
         // Calculate a rotation a step closer to the target and applies rotation to this object
         transform.rotation = Quaternion.LookRotation(newDirection);
+    }
+
+    IEnumerator timeBeforeEnding() {
+        yield return new WaitForSeconds(1f);
+        gameEnding.ShowUI(youWin);
     }
 
     //delete when done visualizing sight
