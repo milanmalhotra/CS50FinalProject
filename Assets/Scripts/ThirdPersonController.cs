@@ -23,18 +23,17 @@ public class ThirdPersonController : MonoBehaviour
     public int maxAngle = 45;
     [Range(50, 500)]
     public int sensitivity = 200;
-    CursorLockMode lockMode;
 
 
     void Awake()
     {
         cam = Camera.main.transform;
-        lockMode = CursorLockMode.Locked;
-        Cursor.lockState = lockMode;
+        Cursor.visible = false;
     }
 
     void Update()
     {
+        Cursor.lockState = CursorLockMode.Confined;
         Move();
         Rotate();
     }

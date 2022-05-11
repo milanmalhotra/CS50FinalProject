@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour {
     public GameObject bladeGameObject;
     public float bladeExtendSpeed = 0.1f;
-    public bool weaponActive = false;
+    public bool weaponActive;
     public AudioClip soundOn;
     public AudioClip soundOff;
     public AudioClip soundLoop;
