@@ -1,5 +1,5 @@
-# 1v1 Star Wars FaceOff Game
-#### Video Demo: <URL>
+# 1v1 Star Wars Combat Game
+#### Video Demo: https://www.youtube.com/watch?v=yth3zBW6i4M
 #### Description: 
 This is a game built in Unity with C# that is a simple 1v1 lightsaber fighting game. It features attack combos, blocking, various animations/animation states, and a functioning enemy AI!
 Within this project there are multiple different folders containing important aspects of the game including:

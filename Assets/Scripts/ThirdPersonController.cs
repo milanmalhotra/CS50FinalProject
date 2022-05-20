@@ -71,7 +71,6 @@ public class ThirdPersonController : MonoBehaviour
             speed = walkSpeed;
         }
 
-        // if (!isDead)
         characterController.Move(moveDirection * speed * Time.deltaTime);
     }
 
